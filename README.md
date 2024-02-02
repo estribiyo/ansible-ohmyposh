@@ -1,1 +1,1 @@
-# ansible-ohmyposh
+Instalación de Oh My Posh
