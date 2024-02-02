@@ -9,14 +9,16 @@
 - name: Check if oh-my-posh is already installed
   stat:
     path: /usr/local/bin/oh-my-posh-install
-  register: ohmyposhinstalled
+  register: installer
 
 - name: Download script installation
-  get_url: https://ohmyposh.dev/install.sh
-  target: /usr/local/bin/oh-my-posh-install
-  when: not ohmyposhinstalled.stat.exists
+  get_url:
+    url: https://ohmyposh.dev/install.sh
+    dest: /usr/local/bin/oh-my-posh-install
+    mode: '0755'
+  when: not installer.stat.exists
 
 - name: Execute installation
   shell: /usr/local/bin/oh-my-posh-install
   changed_when: false
-  when: not ohmyposhinstalled.stat.exists
+  when: not installer.stat.exists
