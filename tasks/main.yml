@@ -22,3 +22,9 @@
   shell: /usr/local/bin/oh-my-posh-install
   changed_when: false
   when: not installer.stat.exists
+
+- name: Add oh-my-posh to .bashrc
+  lineinfile:
+    path: /home/{{ user.login }}/.bashrc
+    line: 'eval "$(oh-my-posh init bash)"'
+    create: true
